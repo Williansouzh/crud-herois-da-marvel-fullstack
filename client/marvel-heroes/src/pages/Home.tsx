@@ -33,7 +33,9 @@ const Home: React.FC = () => {
     id: number,
     hero: { name: string; abilities: string[]; origin: string }
   ) => {
-    updateHeroService(id, hero).then(() => dispatch(updateHero({ id, hero })));
+    updateHeroService(id, hero).then(() =>
+      dispatch(updateHero({ id, hero: { id, ...hero } }))
+    );
   };
 
   const handleDeleteHero = (id: number) => {
