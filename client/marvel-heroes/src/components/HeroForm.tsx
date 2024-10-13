@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import {
+  FormContainer,
+  Input,
+  SubmitButton,
+  ErrorMessage,
+} from "../styles/HeroForm.styles";
 
 type HeroFormProps = {
   onSubmit: (hero: {
@@ -15,38 +21,67 @@ const HeroForm: React.FC<HeroFormProps> = ({ onSubmit, initialData }) => {
     initialData?.abilities.join(", ") || ""
   );
   const [origin, setOrigin] = useState(initialData?.origin || "");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!name || !abilities || !origin) {
+      setError("Todos os campos precisam ser preenchidos!");
+      return;
+    }
+
+    setError(null);
+
     onSubmit({
       name,
       abilities: abilities.split(",").map((ability) => ability.trim()),
       origin,
     });
+
+    setName("");
+    setAbilities("");
+    setOrigin("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Nome"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Habilidades (separadas por vírgula)"
-        value={abilities}
-        onChange={(e) => setAbilities(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Origem"
-        value={origin}
-        onChange={(e) => setOrigin(e.target.value)}
-      />
-      <button type="submit">Salvar</button>
-    </form>
+    <FormContainer>
+      <form
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "15px",
+        }}
+        className="form"
+        onSubmit={handleSubmit}
+      >
+        <Input
+          type="text"
+          placeholder="Nome"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Habilidades (separadas por vírgula)"
+          value={abilities}
+          onChange={(e) => setAbilities(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Origem"
+          value={origin}
+          onChange={(e) => setOrigin(e.target.value)}
+        />
+
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+
+        <SubmitButton type="submit">Salvar</SubmitButton>
+      </form>
+    </FormContainer>
   );
 };
 

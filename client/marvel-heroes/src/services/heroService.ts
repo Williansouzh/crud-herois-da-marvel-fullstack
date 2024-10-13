@@ -1,12 +1,22 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000", // URL do backend NestJS
+  baseURL: "http://localhost:3000",
 });
+
+const mapHeroToFrontend = (hero: any) => ({
+  ...hero,
+  id: hero._id,
+  _id: undefined,
+});
+
+const mapHeroesToFrontend = (heroes: any[]) => {
+  return heroes.map(mapHeroToFrontend);
+};
 
 export const getHeroes = async () => {
   const response = await api.get("/heroes");
-  return response.data;
+  return mapHeroesToFrontend(response.data);
 };
 
 export const createHero = async (hero: {
@@ -15,7 +25,7 @@ export const createHero = async (hero: {
   origin: string;
 }) => {
   const response = await api.post("/heroes", hero);
-  return response.data;
+  return mapHeroToFrontend(response.data);
 };
 
 export const updateHero = async (
@@ -23,7 +33,7 @@ export const updateHero = async (
   hero: { name: string; abilities: string[]; origin: string }
 ) => {
   const response = await api.put(`/heroes/${id}`, hero);
-  return response.data;
+  return mapHeroToFrontend(response.data);
 };
 
 export const deleteHero = async (id: string) => {

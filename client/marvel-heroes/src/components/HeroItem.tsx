@@ -1,4 +1,12 @@
 import React from "react";
+import {
+  ButtonContainer,
+  DeleteButton,
+  EditButton,
+  HeroDetails,
+  HeroName,
+  HeroCard,
+} from "../styles/HeroItem.styles";
 
 type Hero = {
   id: string;
@@ -15,13 +23,21 @@ type HeroItemProps = {
 
 const HeroItem: React.FC<HeroItemProps> = ({ hero, onEdit, onDelete }) => {
   return (
-    <div>
-      <h3>{hero.name}</h3>
-      <p>Habilidades: {hero.abilities.join(", ")}</p>
-      <p>Origem: {hero.origin}</p>
-      <button onClick={() => onEdit(hero.id)}>Editar</button>
-      <button onClick={() => onDelete(hero.id)}>Excluir</button>
-    </div>
+    <HeroCard>
+      <HeroName>{hero.name}</HeroName>
+      <HeroDetails>
+        <p>
+          <strong>Habilidades:</strong> {hero.abilities.join(", ")}
+        </p>
+        <p>
+          <strong>Origem:</strong> {hero.origin}
+        </p>
+      </HeroDetails>
+      <ButtonContainer>
+        <EditButton onClick={() => onEdit(hero.id)}>Editar</EditButton>
+        <DeleteButton onClick={() => onDelete(hero.id)}>Excluir</DeleteButton>
+      </ButtonContainer>
+    </HeroCard>
   );
 };
 

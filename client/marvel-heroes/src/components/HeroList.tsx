@@ -1,5 +1,6 @@
 import React from "react";
 import HeroItem from "./HeroItem";
+import { HeroListContainer } from "../styles/Herolist.styles";
 
 type Hero = {
   id: string;
@@ -16,7 +17,7 @@ type HeroListProps = {
 
 const HeroList: React.FC<HeroListProps> = ({ heroes, onEdit, onDelete }) => {
   return (
-    <div>
+    <HeroListContainer>
       {heroes.map((hero) => (
         <HeroItem
           key={hero.id}
@@ -25,7 +26,7 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, onEdit, onDelete }) => {
           onDelete={onDelete}
         />
       ))}
-    </div>
+    </HeroListContainer>
   );
 };
 

@@ -1,21 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
-import { setHeroes, addHero, updateHero, deleteHero } from "../store/heroSlice";
+import { setHeroes, addHero, deleteHero } from "../store/heroSlice";
 import {
   getHeroes,
   createHero,
-  updateHero as updateHeroService,
   deleteHero as deleteHeroService,
 } from "../services/heroService";
 import HeroList from "../components/HeroList";
-import HeroForm from "../components/HeroForm";
+import Modal from "../components/HeroModal";
 import { useNavigate } from "react-router-dom";
+import {
+  HomeContainer,
+  HeroSection,
+  SectionTitle,
+  ButtonContainer,
+  Button,
+} from "../styles/pages/Home.styles";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const heroes = useSelector((state: RootState) => state.heroes.heroes);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getHeroes().then((data) => dispatch(setHeroes(data)));
@@ -27,15 +34,7 @@ const Home: React.FC = () => {
     origin: string;
   }) => {
     createHero(hero).then((data) => dispatch(addHero(data)));
-  };
-
-  const handleUpdateHero = (
-    id: string,
-    hero: { name: string; abilities: string[]; origin: string }
-  ) => {
-    updateHeroService(id, hero).then(() =>
-      dispatch(updateHero({ id, hero: { id, ...hero } }))
-    );
+    setIsModalOpen(false); // Close the modal after submission
   };
 
   const handleDeleteHero = (id: string) => {
@@ -47,16 +46,32 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
+    <HomeContainer>
       <h1>Lista de Heróis</h1>
-      <HeroList
-        heroes={heroes}
-        onEdit={handleEdit}
-        onDelete={handleDeleteHero}
+      <SectionTitle>Criar Novo Herói</SectionTitle>
+
+      <ButtonContainer>
+        <Button onClick={() => setIsModalOpen(true)}>Criar Herói</Button>
+        <Button onClick={() => navigate("/")} disabled={heroes.length === 0}>
+          Voltar para a Lista
+        </Button>
+      </ButtonContainer>
+
+      <HeroSection>
+        <HeroList
+          heroes={heroes}
+          onEdit={handleEdit}
+          onDelete={handleDeleteHero}
+        />
+      </HeroSection>
+
+      {/* Modal to create a hero */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleCreateHero}
       />
-      <h2>Criar Novo Herói</h2>
-      <HeroForm onSubmit={handleCreateHero} />
-    </div>
+    </HomeContainer>
   );
 };
 

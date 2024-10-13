@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
 import HeroForm from "../components/HeroForm";
 import { updateHero } from "../store/heroSlice";
 import { updateHero as updateHeroService } from "../services/heroService";
+import {
+  HeroDetailContainer,
+  HeroDetailHeader,
+  BackButton,
+} from "../styles/pages/HeroDetails.styles"; // Import styles
 
 const HeroDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,10 +38,15 @@ const HeroDetail: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Editando Herói: {hero.name}</h1>
+    <HeroDetailContainer>
+      <HeroDetailHeader>Editando Herói: {hero.name}</HeroDetailHeader>
+
+      {/* Button to go back to the list of heroes */}
+      <BackButton onClick={() => navigate("/")}>Voltar para a Lista</BackButton>
+
+      {/* Hero Form for editing */}
       <HeroForm onSubmit={handleUpdateHero} initialData={hero} />
-    </div>
+    </HeroDetailContainer>
   );
 };
 
