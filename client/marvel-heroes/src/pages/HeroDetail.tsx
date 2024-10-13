@@ -10,8 +10,9 @@ const HeroDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const hero = useSelector((state: RootState) =>
-    state.heroes.heroes.find((h) => h.id === Number(id))
+    state.heroes.heroes.find((h) => h.id === id)
   );
 
   const handleUpdateHero = (heroData: {

@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Hero = {
-  id: number;
+interface Hero {
+  id: string;
   name: string;
   abilities: string[];
   origin: string;
-};
+}
 
-type HeroState = {
+interface HeroState {
   heroes: Hero[];
-};
+}
 
 const initialState: HeroState = {
   heroes: [],
@@ -25,14 +25,19 @@ const heroSlice = createSlice({
     addHero: (state, action: PayloadAction<Hero>) => {
       state.heroes.push(action.payload);
     },
-    updateHero: (state, action: PayloadAction<{ id: number; hero: Hero }>) => {
+
+    updateHero: (
+      state,
+      action: PayloadAction<{ id: string; hero: Partial<Hero> }>
+    ) => {
       const { id, hero } = action.payload;
       const index = state.heroes.findIndex((h) => h.id === id);
-      if (index >= 0) {
-        state.heroes[index] = hero;
+
+      if (index !== -1) {
+        state.heroes[index] = { ...state.heroes[index], ...hero };
       }
     },
-    deleteHero: (state, action: PayloadAction<number>) => {
+    deleteHero: (state, action: PayloadAction<string>) => {
       state.heroes = state.heroes.filter((hero) => hero.id !== action.payload);
     },
   },

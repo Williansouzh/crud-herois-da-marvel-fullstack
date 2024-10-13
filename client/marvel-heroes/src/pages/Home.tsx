@@ -30,7 +30,7 @@ const Home: React.FC = () => {
   };
 
   const handleUpdateHero = (
-    id: number,
+    id: string,
     hero: { name: string; abilities: string[]; origin: string }
   ) => {
     updateHeroService(id, hero).then(() =>
@@ -38,11 +38,11 @@ const Home: React.FC = () => {
     );
   };
 
-  const handleDeleteHero = (id: number) => {
+  const handleDeleteHero = (id: string) => {
     deleteHeroService(id).then(() => dispatch(deleteHero(id)));
   };
 
-  const handleEdit = (id: number) => {
+  const handleEdit = (id: string) => {
     navigate(`/hero/${id}`);
   };
 

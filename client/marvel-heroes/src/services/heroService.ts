@@ -19,14 +19,14 @@ export const createHero = async (hero: {
 };
 
 export const updateHero = async (
-  id: number,
+  id: string,
   hero: { name: string; abilities: string[]; origin: string }
 ) => {
   const response = await api.put(`/heroes/${id}`, hero);
   return response.data;
 };
 
-export const deleteHero = async (id: number) => {
+export const deleteHero = async (id: string) => {
   const response = await api.delete(`/heroes/${id}`);
   return response.data;
 };

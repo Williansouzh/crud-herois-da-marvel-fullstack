@@ -1,7 +1,7 @@
 import React from "react";
 
 type Hero = {
-  id: number;
+  id: string;
   name: string;
   abilities: string[];
   origin: string;
@@ -9,8 +9,8 @@ type Hero = {
 
 type HeroItemProps = {
   hero: Hero;
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 };
 
 const HeroItem: React.FC<HeroItemProps> = ({ hero, onEdit, onDelete }) => {
