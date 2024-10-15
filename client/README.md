@@ -1,117 +1,155 @@
-# Desafio: Criação de um CRUD de Novos Heróis da Marvel
+# Marvel Heroes CRUD Application
 
-Neste desafio, você deverá desenvolver uma aplicação full-stack utilizando React para o frontend e Node.js com NestJS para o backend. O objetivo é implementar um sistema de gerenciamento de novos heróis da Marvel com operações CRUD (Create, Read, Update, Delete).
+This project is a full-stack CRUD application to manage Marvel heroes. It includes a frontend built with React and TypeScript, and a backend built with NestJS, both deployed online.
 
-> OBS : Você receberá um e-mail com a data de início dos desafios, mas eles já estão disponíveis para acesso imediato. 
-Se ainda não preencheu o formulário, por favor, acesse o link para completá-lo.
-[Forms de inscrição](https://forms.gle/EJKDNKdmVZM3zQTr7)
-é importante está inscrito no formulário , pois o seu email precisa ser validado
+## Table of Contents
 
-## Requisitos do Projeto
+- [Marvel Heroes CRUD Application](#marvel-heroes-crud-application)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Frontend](#frontend)
+    - [Features](#features)
+    - [Components](#components)
+    - [Technologies](#technologies)
+  - [Backend](#backend)
+    - [Routes](#routes)
+    - [Backend Technologies](#backend-technologies)
+  - [Technical Requirements](#technical-requirements)
+  - [How to Use](#how-to-use)
+  - [Deployment](#deployment)
+  - [Running Locally](#running-locally)
+  - [Conclusion](#conclusion)
 
-### Frontend (React + TypeScript)
+## Overview
 
-**Página Principal:**
-- Exibe a lista de heróis.
-- Permite a criação de um novo herói.
-- Permite a atualização de heróis existentes.
-- Permite a exclusão de heróis.
+The **Marvel Heroes CRUD Application** allows users to manage Marvel heroes through CRUD operations (Create, Read, Update, Delete). The frontend was developed using React and TypeScript, and the backend using NestJS. The app is deployed using Vercel for the frontend and Render for the backend.
 
-**Componentes Necessários:**
-- `HeroList`: Componente que exibe a lista de heróis.
-- `HeroItem`: Componente que representa um herói individual com opções de editar e excluir.
-- `HeroForm`: Componente para criar e editar heróis.
+## Frontend
 
-### Backend (Node + NestJS + TypeScript + Banco de Dados Relacional ou Não Relacional)
+### Features
 
-**Rotas para CRUD de Heróis:**
+- **List Heroes**: Displays a list of all registered heroes.
+- **Add Hero**: Create a new hero by providing details such as name, skills, and origin.
+- **Edit Hero**: Update existing hero information.
+- **Delete Hero**: Remove a hero from the database.
 
-- **Criar Herói**
-  - **Endpoint:** `/heroes`
-  - **Método:** POST
-  - **Descrição:** Cria um novo herói. Os dados do herói (nome, habilidades, e origem) devem ser enviados no corpo da requisição. O cadastro deve ser predefinido a heróis que já existem no universo Marvel.
+### Components
 
-- **Listar Heróis**
-  - **Endpoint:** `/heroes`
-  - **Método:** GET
-  - **Descrição:** Retorna a lista de todos os heróis.
+1. **HeroList**: Displays all heroes with options to edit or delete.
+2. **HeroItem**: Shows details for a single hero, with buttons to edit or delete.
+3. **HeroForm**: Used for creating and editing heroes, with fields for name, skills, and origin.
 
-- **Atualizar Herói**
-  - **Endpoint:** `/heroes/:id`
-  - **Método:** PUT
-  - **Descrição:** Atualiza um herói existente com base no ID. Os novos dados do herói (nome, habilidades, e origem) devem ser enviados no corpo da requisição.
+### Technologies
 
-- **Excluir Herói**
-  - **Endpoint:** `/heroes/:id`
-  - **Método:** DELETE
-  - **Descrição:** Exclui um herói existente com base no ID.
+- React with TypeScript for building the user interface.
+- Axios for making HTTP requests to the backend API.
+- React Context API for state management.
+- Deployed on [Vercel](https://crud-herois-da-marvel-fullstack.vercel.app/).
 
-## Requisitos Técnicos
+## Backend
 
-**Frontend:**
-- Utilizar React com TypeScript.
-- Utilizar Axios ou Fetch para fazer requisições HTTP ao backend.
-- Gerenciar o estado da aplicação utilizando o contexto do React ou uma biblioteca de gerenciamento de estado como Redux ou Zustand.
-- Uso do SWR será considerado uma habilidade valorizada.
-- É opcional utilizar a API de personagens da Marvel.
+### Routes
 
-**Backend:**
-- Utilizar NestJS com TypeScript.
-- Utilizar um banco de dados relacional ou não relacional (ex. MongoDB, PostgreSQL, MySQL).
-- Implementar as operações CRUD (Create, Read, Update, Delete) para gerenciar os heróis.
+1. **Create Hero**
 
-## Critérios de Avaliação
+   - **Endpoint**: `/heroes`
+   - **Method**: `POST`
+   - **Description**: Creates a new hero with the provided data (name, skills, origin).
+   - **Request Body**:
+     ```json
+     {
+       "name": "Spider-Man",
+       "skills": ["Agility", "Spider-Sense"],
+       "origin": "New York"
+     }
+     ```
+   - **Response**: Status 201 with the created hero.
 
-- Funcionamento correto das operações CRUD no frontend e backend.
-- Qualidade e clareza do código.
-- Organização do projeto e estrutura de pastas.
-- Documentação das rotas e como utilizá-las.
-- Interface do usuário e experiência do usuário (UI/UX).
+2. **List Heroes**
 
-## Entrega
+   - **Endpoint**: `/heroes`
+   - **Method**: `GET`
+   - **Description**: Retrieves a list of all registered heroes.
+   - **Response**: Status 200 with a list of heroes.
 
-Faça o deploy da sua aplicação em plataformas como GitHub Pages, Heroku, Vercel, Netlify, ou qualquer outra de sua preferência. Após concluir o desafio, envie o link do deploy e do repositório do código-fonte por e-mail para projetofrontendfusion@gmail.com. O e-mail deve incluir:
+3. **Update Hero**
 
-- Nome
-- Link do GitHub
-- Link do LinkedIn
-- Data de Início
-- Data de Entrega
-- Link do GitHub com o Código
-- Link do Deploy
+   - **Endpoint**: `/heroes/:id`
+   - **Method**: `PUT`
+   - **Description**: Updates an existing hero’s information using the provided ID.
+   - **Request Body**:
+     ```json
+     {
+       "name": "Iron Man",
+       "skills": ["Technology", "Genius"],
+       "origin": "California"
+     }
+     ```
+   - **Response**: Status 200 with the updated hero.
 
-**Observação:** É obrigatório entregar os três desafios em até 20 dias após o início. O desafio atual é a Parte 01 de 03 desafios.
+4. **Delete Hero**
+   - **Endpoint**: `/heroes/:id`
+   - **Method**: `DELETE`
+   - **Description**: Deletes the hero with the given ID.
+   - **Response**: Status 204 (No Content).
 
-## Prazo
+### Backend Technologies
 
-Você tem 20 dias para concluir todos os três desafios.
+- NestJS with TypeScript for building the API.
+- MongoDB as the database for storing heroes data.
+- Deployed on [Render](https://marvel-heroes-api.onrender.com).
 
-## Como Participar
+## Technical Requirements
 
-1. Faça um fork deste repositório.
-2. Desenvolva sua solução no seu repositório forkado.
-3. Após completar o desafio, envie o link do deploy e do repositório através do e-mail para projetofrontendfusion@gmail.com com o assunto: "Entrega + Desafios[01] + Seu Nome".
+**Frontend**:
 
-**Exemplo de E-mail**
+- React with TypeScript.
+- HTTP requests using Axios.
+- State management using React Context API or external library (e.g., Redux).
+- SWR is a plus for data fetching.
 
-Assunto: Entrega + Desafios[01] + João Silva
-Olá,
+**Backend**:
 
-Segue abaixo a entrega do Desafio 01 para o processo seletivo do Frontend Fusion.
+- NestJS with TypeScript.
+- Database connection to mongoDB.
+- CRUD operations to manage the heroes.
 
-Nome: João Silva Link do GitHub: https://github.com/joaosilva 
-Link do LinkedIn: https://linkedin.com/in/joaosilva 
-Data de Início: 01/09/2024 Data de Entrega: 20/09/2024 
-Link do GitHub com o Código: https://github.com/joaosilva/desafio01 
-Link do Deploy: https://joaosilva.netlify.app
+## How to Use
 
-Agradeço a oportunidade e estou à disposição para qualquer dúvida.
+1. **Access the Frontend**:  
+   Go to [Marvel Heroes CRUD Frontend](https://crud-herois-da-marvel-fullstack.vercel.app/) to interact with the heroes management interface.
 
-Atenciosamente, João Silva
+2. **API Endpoints**:
+   - Base URL: [Marvel Heroes API](https://marvel-heroes-api.onrender.com)
+   - Use the API routes mentioned above to perform CRUD operations on the heroes.
 
+## Deployment
 
-Boa sorte e estamos ansiosos para ver seu trabalho! 🚀
+- **Frontend Deployment**:  
+  Access the deployed frontend at [crud-herois-da-marvel-fullstack.vercel.app](https://crud-herois-da-marvel-fullstack.vercel.app/).
+- **Backend Deployment**:  
+  The backend API is live at [marvel-heroes-api.onrender.com](https://marvel-heroes-api.onrender.com).
 
-Este desafio faz parte do processo seletivo do projeto Frontend Fusion para a vaga de Desenvolvedor React Júnior.
+## Running Locally
 
+To run the project locally, follow these steps:
 
+1. Clone the repositories for both frontend and backend.
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. **Frontend**: Run the React app:
+   ```bash
+   npm start
+   ```
+4. **Backend**: Set up the database and environment variables, then start the NestJS app:
+   ```bash
+   npm start
+   ```
+
+## Conclusion
+
+This project demonstrates a fully functional Marvel Heroes CRUD application using modern web technologies such as React, NestJS, and PostgreSQL. The code is well-structured, and the app is deployed for easy access.
+
+---
