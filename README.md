@@ -1,46 +1,155 @@
-# Getting Started with Create React App
+# Marvel Heroes CRUD Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full-stack CRUD application to manage Marvel heroes. It includes a frontend built with React and TypeScript, and a backend built with NestJS, both deployed online.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Marvel Heroes CRUD Application](#marvel-heroes-crud-application)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Frontend](#frontend)
+    - [Features](#features)
+    - [Components](#components)
+    - [Technologies](#technologies)
+  - [Backend](#backend)
+    - [Routes](#routes)
+    - [Backend Technologies](#backend-technologies)
+  - [Technical Requirements](#technical-requirements)
+  - [How to Use](#how-to-use)
+  - [Deployment](#deployment)
+  - [Running Locally](#running-locally)
+  - [Conclusion](#conclusion)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The **Marvel Heroes CRUD Application** allows users to manage Marvel heroes through CRUD operations (Create, Read, Update, Delete). The frontend was developed using React and TypeScript, and the backend using NestJS. The app is deployed using Vercel for the frontend and Render for the backend.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Frontend
 
-### `npm test`
+### Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **List Heroes**: Displays a list of all registered heroes.
+- **Add Hero**: Create a new hero by providing details such as name, skills, and origin.
+- **Edit Hero**: Update existing hero information.
+- **Delete Hero**: Remove a hero from the database.
 
-### `npm run build`
+### Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **HeroList**: Displays all heroes with options to edit or delete.
+2. **HeroItem**: Shows details for a single hero, with buttons to edit or delete.
+3. **HeroForm**: Used for creating and editing heroes, with fields for name, skills, and origin.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Technologies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React with TypeScript for building the user interface.
+- Axios for making HTTP requests to the backend API.
+- React Context API for state management.
+- Deployed on [Vercel](https://crud-herois-da-marvel-fullstack.vercel.app/).
 
-### `npm run eject`
+## Backend
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Routes
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Create Hero**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   - **Endpoint**: `/heroes`
+   - **Method**: `POST`
+   - **Description**: Creates a new hero with the provided data (name, skills, origin).
+   - **Request Body**:
+     ```json
+     {
+       "name": "Spider-Man",
+       "skills": ["Agility", "Spider-Sense"],
+       "origin": "New York"
+     }
+     ```
+   - **Response**: Status 201 with the created hero.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. **List Heroes**
 
-## Learn More
+   - **Endpoint**: `/heroes`
+   - **Method**: `GET`
+   - **Description**: Retrieves a list of all registered heroes.
+   - **Response**: Status 200 with a list of heroes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Update Hero**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   - **Endpoint**: `/heroes/:id`
+   - **Method**: `PUT`
+   - **Description**: Updates an existing hero’s information using the provided ID.
+   - **Request Body**:
+     ```json
+     {
+       "name": "Iron Man",
+       "skills": ["Technology", "Genius"],
+       "origin": "California"
+     }
+     ```
+   - **Response**: Status 200 with the updated hero.
+
+4. **Delete Hero**
+   - **Endpoint**: `/heroes/:id`
+   - **Method**: `DELETE`
+   - **Description**: Deletes the hero with the given ID.
+   - **Response**: Status 204 (No Content).
+
+### Backend Technologies
+
+- NestJS with TypeScript for building the API.
+- MongoDB as the database for storing heroes data.
+- Deployed on [Render](https://marvel-heroes-api.onrender.com).
+
+## Technical Requirements
+
+**Frontend**:
+
+- React with TypeScript.
+- HTTP requests using Axios.
+- State management using React Context API or external library (e.g., Redux).
+- SWR is a plus for data fetching.
+
+**Backend**:
+
+- NestJS with TypeScript.
+- Database connection to mongoDB.
+- CRUD operations to manage the heroes.
+
+## How to Use
+
+1. **Access the Frontend**:  
+   Go to [Marvel Heroes CRUD Frontend](https://crud-herois-da-marvel-fullstack.vercel.app/) to interact with the heroes management interface.
+
+2. **API Endpoints**:
+   - Base URL: [Marvel Heroes API](https://marvel-heroes-api.onrender.com)
+   - Use the API routes mentioned above to perform CRUD operations on the heroes.
+
+## Deployment
+
+- **Frontend Deployment**:  
+  Access the deployed frontend at [crud-herois-da-marvel-fullstack.vercel.app](https://crud-herois-da-marvel-fullstack.vercel.app/).
+- **Backend Deployment**:  
+  The backend API is live at [marvel-heroes-api.onrender.com](https://marvel-heroes-api.onrender.com).
+
+## Running Locally
+
+To run the project locally, follow these steps:
+
+1. Clone the repositories for both frontend and backend.
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. **Frontend**: Run the React app:
+   ```bash
+   npm start
+   ```
+4. **Backend**: Set up the database and environment variables, then start the NestJS app:
+   ```bash
+   npm start
+   ```
+
+## Conclusion
+
+This project demonstrates a fully functional Marvel Heroes CRUD application using modern web technologies such as React, NestJS, and PostgreSQL. The code is well-structured, and the app is deployed for easy access.
+
+---
