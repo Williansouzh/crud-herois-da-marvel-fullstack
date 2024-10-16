@@ -2,9 +2,12 @@
 
 This project is a full-stack CRUD application to manage Marvel heroes. It includes a frontend built with React and TypeScript, and a backend built with NestJS, both deployed online.
 
+# Backend repository: https://github.com/Williansouzh/marvel-heroes-api
+
 ## Table of Contents
 
 - [Marvel Heroes CRUD Application](#marvel-heroes-crud-application)
+- [Backend repository: https://github.com/Williansouzh/marvel-heroes-api](#backend-repository-httpsgithubcomwilliansouzhmarvel-heroes-api)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Frontend](#frontend)
